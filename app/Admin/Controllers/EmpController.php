@@ -31,7 +31,7 @@ class EmpController extends AdminController
 
         //ADD Custom Action
         $grid->actions(function ($actions) {
-            $actions->add(new PrintPDF());
+            $actions->add(new PrintPDF);
         });
         //end
 
@@ -40,7 +40,6 @@ class EmpController extends AdminController
         $grid->column('pos.name', __('Posisi'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-
 
 
         return $grid;
@@ -84,7 +83,7 @@ class EmpController extends AdminController
     public function printPDF($id){
         $emp = Emp::find($id);
         $pdf = PDF::loadView('emp_pdf',['emp'=>$emp]);
-        return $pdf->stream('emp.pdf');
+        return $pdf->stream('emp-'.$id.'.pdf');
     }
 
 
